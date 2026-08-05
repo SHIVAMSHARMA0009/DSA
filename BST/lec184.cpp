@@ -95,7 +95,7 @@ Node* buildBST(Node* root,int data) {
         root->left = buildBST(root->left,data);          // if value is less than root node -> insert it  to left
     }
     else{
-        root->right = buildBST(root->right,data);              // otherwise left
+        root->right = buildBST(root->right,data);              // otherwise right
     }
 
     return root;
