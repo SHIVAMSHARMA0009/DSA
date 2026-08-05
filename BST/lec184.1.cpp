@@ -32,6 +32,8 @@ Node* buildBST(Node* root,int data) {
         root->right = buildBST(root->right,data);
     }
 
+    return root;
+
 }
 
 void takeInput(Node* &root) {
