@@ -34,15 +34,15 @@ Node* buildTree() {
     }
 }
 
-Node* lowestCommomAncestor(Node* root,Node* p ,Node* q) {
+Node* lowestCommonAncestor(Node* root,Node* p ,Node* q) {
 
     if(root == NULL) return NULL;
 
     if(root->data == p->data) return p;     // agr mile jaye toh node ko bhejo 
     if(root->data == q->data) return q;      
 
-    Node* leftAns = lowestCommomAncestor(root->left,p,q);      // nhi toh left me check kro
-    Node* rightAns = lowestCommomAncestor(root->right,p,q);    // right me check kro
+    Node* leftAns = lowestCommonAncestor(root->left,p,q);      // nhi toh left me check kro
+    Node* rightAns = lowestCommonAncestor(root->right,p,q);    // right me check kro
 
     if(leftAns == NULL && rightAns == NULL) return NULL;         //  p & q mile hi nhi
     if(leftAns != NULL && rightAns == NULL) return leftAns;      // p & q dono left side me hai
@@ -66,7 +66,7 @@ int main () {
     Node* q = new Node(val1);
 
 
-    cout<<"The Lowest Common Ancestor : "<<lowestCommomAncestor(root,p,q)->data;
+    cout<<"The Lowest Common Ancestor : "<<lowestCommonAncestor(root,p,q)->data;
 
     return 0;
 
