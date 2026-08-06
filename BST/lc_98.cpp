@@ -1,5 +1,5 @@
-/* validate we have to whether the given tree it BST or not */
-/* approach is very simple if current node falls under the range the means left (-infinite,parent_node->value)  & right (parent_node->value,infinite) */
+/* validate BST :  we have to check whether the given tree is BST or not */
+/* approach is very simple if current node falls under the range means left (-infinite,parent_node->value)  & right (parent_node->value,infinite) */
 
 #include<bits/stdc++.h>
 using namespace std;
