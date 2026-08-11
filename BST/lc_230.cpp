@@ -87,7 +87,7 @@ int k2(Node* root,int k) {
 
     int n = arr.size();
 
-    return k < n ? arr[k-1] : -1;
+    return k <= n ? arr[k-1] : -1;
 
 }
 
