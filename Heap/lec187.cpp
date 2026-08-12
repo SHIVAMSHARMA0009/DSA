@@ -1,4 +1,4 @@
-/* we have to insert the value in (max) heap with the help of array */
+/* we have to insert & delete the value in (max) heap with the help of array */
 
  #include<bits/stdc++.h>
  using namespace std;
