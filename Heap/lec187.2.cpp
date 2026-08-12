@@ -5,24 +5,22 @@ using namespace std;
 
 
 void heapify(vector<int>&arr,int n,int i) {
-
-    int parentIndex = i;                          
+                          
     int leftChildIndex = 2*i;
     int rightChildIndex = 2*i + 1;
-    int largestIndex = parentIndex;               // taking parent index as  largest value's index
+    int largestIndex = i;               // taking parent index as  largest value's index
 
-    if(leftChildIndex <= n && arr[leftChildIndex] > arr[parentIndex]) {                // updating the largest value's index
+    if(leftChildIndex <= n && arr[leftChildIndex] > arr[largestIndex]) {                // updating the largest value's index
         largestIndex = leftChildIndex;
     }
 
-    if(rightChildIndex <= n && arr[rightChildIndex] > arr[parentIndex]) {
+    if(rightChildIndex <= n && arr[rightChildIndex] > arr[largestIndex]) {
         largestIndex = rightChildIndex;
     }
 
-    if(largestIndex != parentIndex) {
-        swap(arr[parentIndex],arr[largestIndex]);      // placing the node at its correct position if above 3-condition satisfies
-        parentIndex = largestIndex;
-        heapify(arr,n,parentIndex);
+    if(largestIndex != i) {
+        swap(arr[i],arr[largestIndex]);      // placing the node at its correct position if above 3-condition satisfies
+        heapify(arr,n,largestIndex);
     }
 
 }
@@ -33,6 +31,14 @@ void builHeap(vector<int>&arr,int n) {
         heapify(arr,n,i);
     }
 
+}
+
+void heapSort(vector<int>&arr,int n){
+    while(n > 1) {
+        swap(arr[1],arr[n]);
+        n--;
+        heapify(arr,n,1);
+    }
 }
 
 int main() {
@@ -51,6 +57,11 @@ int main() {
 
     cout<<"The Heap Formation : ";
     for(auto val :  arr) {
+        cout<<val<<" ";
+    }
+
+    cout<<"Sorted : ";
+    for(auto val : arr) {
         cout<<val<<" ";
     }
 
