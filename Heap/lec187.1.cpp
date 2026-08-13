@@ -3,7 +3,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
+// T.C : O(logn)
 void heapify(vector<int>&arr,int n,int i) {
 
     int parentIndex = i;                          
@@ -11,11 +11,11 @@ void heapify(vector<int>&arr,int n,int i) {
     int rightChildIndex = 2*i + 1;
     int largestIndex = parentIndex;               // taking parent index as  largest value's index
 
-    if(leftChildIndex <= n && arr[leftChildIndex] > arr[parentIndex]) {                // updating the largest value's index
+    if(leftChildIndex <= n && arr[leftChildIndex] > arr[largestIndex]) {                // updating the largest value's index
         largestIndex = leftChildIndex;
     }
 
-    if(rightChildIndex <= n && arr[rightChildIndex] > arr[parentIndex]) {
+    if(rightChildIndex <= n && arr[rightChildIndex] > arr[largestIndex]) {
         largestIndex = rightChildIndex;
     }
 
@@ -27,6 +27,7 @@ void heapify(vector<int>&arr,int n,int i) {
 
 }
 
+// T.C : O(n)
 void builHeap(vector<int>&arr,int n) {
 
     for(int i=n/2;i>0;i--) {      // here , all leaf nodes index will be after n/2 , so need to touch them as they satisfies the heap condition

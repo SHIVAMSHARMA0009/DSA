@@ -65,7 +65,6 @@
 
             int leftChildIndex = 2*curr_index;            
             int rightChildIndex = 2*curr_index + 1;
-
             int largestVal_index = curr_index;
 
             if(leftChildIndex < size && arr[largestVal_index] < arr[leftChildIndex]) {     // checking which child is largest from its parent node and storing its index

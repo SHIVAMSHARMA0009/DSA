@@ -14,7 +14,7 @@ void heapify(vector<int>&arr,int n,int i) {
         largestIndex = leftChildIndex;
     }
 
-    if(rightChildIndex <= n && arr[rightChildIndex] > arr[largestIndex]) {
+    if(rightChildIndex <= n && arr[rightChildIndex] > arr[largestIndex]) { 
         largestIndex = rightChildIndex;
     }
 
@@ -33,6 +33,7 @@ void builHeap(vector<int>&arr,int n) {
 
 }
 
+// T.C : O(nlogn)
 void heapSort(vector<int>&arr,int n){
     while(n > 1) {
         swap(arr[1],arr[n]);
