@@ -71,6 +71,23 @@ bool searchPrefix(TrieNode* root,string prefix) {
     return searchPrefix(child,prefix.substr(1));
 }
 
+void removeWord(TrieNode* &root,string word) {
+
+    if(word.length() == 0) {           // just mark the terminal value of word as false
+        root->isTerminal = false;
+        return;
+    }     
+
+    char ch = word[0];
+    TrieNode* child;
+    if(root->children.find(ch) != root->children.end()) {
+        child = root->children[ch];
+    }
+
+    removeWord(child,word.substr(1));
+
+}
+
 class Trie {
 public:
 
@@ -83,6 +100,10 @@ public:
     void insert(string word) {
         insertWord(root,word);
     }
+
+    void remove(string word) {
+        removeWord(root,word);
+    }
     
     bool search(string word) {
         return searchWord(root,word);
@@ -91,6 +112,7 @@ public:
     bool startsWith(string prefix) {
         return searchPrefix(root,prefix);
     }
+
 };
 
 int main() {
@@ -106,11 +128,15 @@ int main() {
     cout<<"Does Exist : "<<tr.search("cart")<<endl;
     cout<<"Does Exist : "<<tr.search("cricket")<<endl;
     cout<<"Does Exist : "<<tr.search("campus")<<endl;
+    cout<<"Does Exist : "<<tr.search("care")<<endl;
     cout<<"Does Exist : "<<tr.search("camera")<<endl<<endl;
 
     cout<<"Is prefix : "<<tr.startsWith("car")<<endl;
     cout<<"Is prefix : "<<tr.startsWith("cart")<<endl;
-    cout<<"Is prefix : "<<tr.startsWith("carm")<<endl;
+    cout<<"Is prefix : "<<tr.startsWith("carm")<<endl<<endl;
+    tr.remove("care");
+
+    cout<<"Does Exist : "<<tr.search("care")<<endl;
 
     return 0;
 
