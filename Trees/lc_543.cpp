@@ -34,6 +34,8 @@ Node* buildTree() {
     }
 }
 
+
+// approach 1 : T.C : O(n^2)
 int maxDepth(Node* root) {
     if(root == NULL) return 0;
     int left_depth = maxDepth(root->left) + 1;
@@ -53,11 +55,27 @@ int diameterOfBinaryTree(Node* root) {
     return max({option1,option2,option3});
 }
 
+// approach 2 : T.C : O(n)
+int diameterOfBinaryTree1(Node* root,int &result) {                        // every node has two taak : 
+    if(root == NULL) return 0;                                            
+                                                                    
+    int leftans = diameterOfBinaryTree1(root->left,result);               // 1 : calculating result & updating it by including itself 
+    int rightans = diameterOfBinaryTree1(root->right,result);
+
+    result = max(result,leftans+rightans);
+
+    return max(leftans,rightans) + 1;                      // 2 : returning maximum depth till the node  => why +1 -> bcz edge b/w it and its parent node
+}
+
 int main() {
 
     Node* root = buildTree();
 
     cout<<"The Diameter : "<<diameterOfBinaryTree(root);
+
+    int result = INT_MIN;
+    diameterOfBinaryTree1(root,result);
+    cout<<"The Diameter(Optimized) : "<<result<<endl;
 
     return 0;
 }
