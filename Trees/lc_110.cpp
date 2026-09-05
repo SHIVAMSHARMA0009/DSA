@@ -36,6 +36,8 @@ Node*  buildTree() {
 
 }
 
+
+// approach 1 : T.C : O(n^2)
 int Height(Node* root) {
 
     if(root == NULL) return 0;                         // you reached the leaf node
@@ -73,11 +75,29 @@ bool isBalanced(Node* root) {
 
 }
 
+// T.C : O(n)
+int height(Node* root,bool &condition) {                     // here also every node is doing two taks : 
+    if(root == NULL) return 0;
+
+    int leftheight = height(root->left,condition);                      
+    int rightheight = height(root->right,condition);
+
+    if(condition && abs(leftheight-rightheight) > 1) {             // finding answer from its subtree
+        condition = false;
+    }
+
+    return max(leftheight,rightheight) + 1;                    // return the maximum height till the node
+    
+}
+
 int main() {
 
     Node* root = buildTree();
 
     cout<<"Is Balanced : "<<isBalanced(root);
+
+    bool condition = true;
+    height(root,condition);
 
     return 0;
 
