@@ -38,14 +38,14 @@ int find_maxi(Node* root) {
     int leftsum = find_maxi(root->left);
     int rightsum = find_maxi(root->right);
 
-    return max(leftsum,rightsum) + root->data;
+    return max({0,leftsum,rightsum}) + root->data;    // ignore -ve sum from left ans right tree
 }
 
 int max_sum(Node* root) {
 
-    if(root == NULL) return 0;
+    if(root == NULL) return INT_MIN;
 
-    int sum1 = find_maxi(root->left) + find_maxi(root->right) + root->data;
+    int sum1 = max(0,find_maxi(root->left)) + max(0,find_maxi(root->right)) + root->data;    //ignore -ve sum from left ans right tree
 
     int leftsum = max_sum(root->left);
     int rightsum = max_sum(root->right);
@@ -58,8 +58,8 @@ int max_sum(Node* root) {
 int optimized(Node* root,int &sum) {
     if(root == NULL) return 0;
 
-    int leftsum = optimized(root->left,sum);
-    int rightsum = optimized(root->right,sum);
+    int leftsum = max(optimized(root->left,sum),0);       // ignore negative number
+    int rightsum = max(optimized(root->right,sum),0);
 
     int curr_sum = leftsum + rightsum + root->data;
 
