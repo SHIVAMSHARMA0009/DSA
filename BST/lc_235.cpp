@@ -45,11 +45,14 @@ void takeInput(Node* &root) {
     }
 }
 
+
+
 /* there will exist 4 cases :
    CASE 1 : both the node are on left side
    CASE 2 : both the node are on right side
    CASE 3 & 4 : one node is on right and other is at left -> means root is lca
 */
+
 Node* lca(Node* root,Node* p,Node* q) {
 
     if(root == NULL) return NULL;
@@ -65,6 +68,7 @@ Node* lca(Node* root,Node* p,Node* q) {
     return root;   // case 3 & 4
 
 }
+
 
 
 int main() {
