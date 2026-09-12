@@ -68,7 +68,7 @@ int solveUsingSO(int n,int k,int target) {
     vector<int>prev(target+1,0);
     vector<int>curr(target+1,0);
 
-    prev[0] = 0;     // dp[0] = 0th wali row
+    prev[0] = 1;     // dp[0] = 0th wali row
 
 
     for(int a=1;a<=n;a++) {
@@ -114,6 +114,9 @@ int main() {
 
     ans = solveUsingTabulation(n,k,target);
     cout<<"The Number of Ways (Tabulation)   : "<<ans<<endl;
+
+    ans = solveUsingSO(n,k,target);
+    cout<<"The Number of Ways (SO)   : "<<ans<<endl;
 
     return 0;
 
