@@ -103,8 +103,8 @@ int main() {
     cout<<"Enter The target : ";
     cin>>target;
 
-    // int ans = solveUsingRecursion(n,k,target);
-    // cout<<"The Number of Ways : "<<ans<<endl;
+    int ans = solveUsingRecursion(n,k,target);     // this will give TLE for biggner numbers
+    cout<<"The Number of Ways : "<<ans<<endl;
 
     // n , target both the parameters are changing => n as rows and target as columns
 
