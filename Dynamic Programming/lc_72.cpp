@@ -121,6 +121,9 @@ int main() {
     cout<<"Enter Second Word : ";
     cin>>second;
 
+    if(first.length() == 0) return second.length();
+    if(second.length() == 0) return  first.length();
+
     int i = 0;
     int j = 0;
 
