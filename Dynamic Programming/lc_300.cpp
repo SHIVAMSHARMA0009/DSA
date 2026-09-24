@@ -17,7 +17,7 @@ int solveUsingRecursion(vector<int>&nums,int prev_idx,int curr_idx) {
 }
 
 
-int solveUsingMemoisation(vector<int>&nums,int prev_idx,int curr_idx,vector<vector<int>>&dp) {
+int solveUsingMemoisation(vector<int>&nums,int prev_idx,int curr_idx,vector<vector<int> >&dp) {
     if(curr_idx >= nums.size()) return 0;
 
     if(dp[curr_idx][prev_idx+1] != -1) return dp[curr_idx][prev_idx+1];     // step 3 : if ans exist return it
@@ -36,7 +36,7 @@ int solveUsingMemoisation(vector<int>&nums,int prev_idx,int curr_idx,vector<vect
 
 int solveUsingTabulation(vector<int>&nums) {
     int n = nums.size();
-    vector<vector<int>>dp(n+1,vector<int>(n+1,0));  // step 1 : create dp array , initialize it
+    vector<vector<int> >dp(n+1,vector<int>(n+1,0));  // step 1 : create dp array , initialize it
 
     // step 2 : analyse base case => nth row should be equal to zero ,  that's why initilized the whole dp with 0
 
@@ -55,6 +55,47 @@ int solveUsingTabulation(vector<int>&nums) {
     return dp[0][0];
 }
 
+
+int solveUsingSO(vector<int>&nums) {
+    int n = nums.size();
+    vector<int>currRow(n+1,0);
+    vector<int>nextRow(n+1,0);
+
+    for(int curr=n-1; curr>=0; curr--) {
+        for(int prev=curr-1; prev>=-1; prev--) {
+            int include = 0;
+            if(prev == -1 || nums[prev] < nums[curr]) {
+                include = 1 + nextRow[curr+1];
+            }
+            int exclude = 0 + nextRow[prev+1];
+            currRow[prev+1] = max(include,exclude);
+        }
+        nextRow = currRow;
+    }
+    return currRow[0];
+}
+
+
+int solveUsingBS(vector<int>&nums) {
+
+    vector<int>ans;
+    ans.push_back(nums[0]);
+
+    for(int i=1;i<nums.size();i++) {
+        if(nums[i] > ans.back()) {
+            ans.push_back(nums[i]);
+        }
+        else{
+            // just bada number exist krta hai
+            int index = lower_bound(ans.begin(),ans.end(),nums[i]) - ans.begin();
+            // replace kro
+            ans[index] = nums[i];
+        }
+    }
+    return ans.size();
+}
+
+
 int main() {
 
     int n;
@@ -72,12 +113,18 @@ int main() {
     int ans = solveUsingRecursion(nums,prev_idx,curr_idx);    
     cout<<"The length : "<<ans<<endl;
 
-    vector<vector<int>>dp(n+1,vector<int>(n+1,-1));         // step 1 : find dp array (two parameters changing) , create it , initialize it and pass it 
+    vector<vector<int> >dp(n+1,vector<int>(n+1,-1));         // step 1 : find dp array (two parameters changing) , create it , initialize it and pass it 
     ans = solveUsingMemoisation(nums,prev_idx,curr_idx,dp);
     cout<<"The length (Memoisation ) : "<<ans<<endl;
      
     ans = solveUsingTabulation(nums);
     cout<<"The length (Tabulation) : "<<ans<<endl;
+
+    ans = solveUsingSO(nums);
+    cout<<"The length (SO) : "<<ans<<endl;
+
+    ans = solveUsingBS(nums);
+    cout<<"The length (Binary Search) : "<<ans<<endl;
 
     return 0;
 

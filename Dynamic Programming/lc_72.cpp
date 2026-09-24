@@ -21,7 +21,7 @@ int solveUsingRecursion(string &first,string &second,int i,int j) {
     return ans;
 }
 
-int solveUsingMemoisation(string &first,string &second,int i,int j,vector<vector<int>>&dp) {
+int solveUsingMemoisation(string &first,string &second,int i,int j,vector<vector<int> >&dp) {
     if(i == first.length())  return second.length() - j; 
     if(j == second.length()) return first.length() - i;
 
@@ -46,7 +46,7 @@ int solveUsingMemoisation(string &first,string &second,int i,int j,vector<vector
 
 int solveUsingTabulation(string &first,string &second) {
 
-    vector<vector<int>>dp(first.length()+1,vector<int>(second.length()+1,0));
+    vector<vector<int> >dp(first.length()+1,vector<int>(second.length()+1,0));
 
     for(int j = 0; j <= second.length(); j++) {
         dp[first.length()][j] = second.length() - j;
@@ -129,7 +129,7 @@ int main() {
 
     cout<<"The Minimum Operations : "<<solveUsingRecursion(first,second,i,j)<<endl;
 
-    vector<vector<int>>dp(first.length()+1,vector<int>(second.length()+1,-1));
+    vector<vector<int> >dp(first.length()+1,vector<int>(second.length()+1,-1));
     cout<<"The Minimum Operations (Memoisation) : "<<solveUsingMemoisation(first,second,i,j,dp)<<endl;
 
     cout<<"The Minimum Operations (Tabulation) : "<<solveUsingTabulation(first,second)<<endl;
