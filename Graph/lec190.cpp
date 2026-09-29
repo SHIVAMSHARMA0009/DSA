@@ -23,6 +23,56 @@ class Graph{                                     // unweighted Graph
         }
     }
 
+
+    // entire BFS Logic
+    void bfsTraversal(int src) {
+        queue<int>q;
+        unordered_map<int,bool>visited;
+
+        q.push(src);
+        visited[src] = true;
+
+        while(!q.empty()) {
+            int front = q.front();
+            q.pop();
+
+            cout<<front<<", ";
+            for(auto nbr : adjList[front]) {
+                if(!visited[nbr]) {
+                    q.push(nbr);
+                    visited[nbr] = true;
+                }
+            }
+        }
+    }
+
+
+
+    // entire DFS logic 
+    void dfsHelper(int src,unordered_map<int,bool>& visited) {
+
+        // print and mark true after immediate call
+        cout<<src<<", ";
+        visited[src] = true;
+
+        for(auto nbr : adjList[src]) {
+            // if neighbour are not visited -> then call dfs for them
+            if(!visited[nbr]) {
+                dfsHelper(nbr,visited);
+            }
+        }
+    }
+
+    void dfsTraversal(int src,int n) {
+        unordered_map<int,bool>visited;
+        for(int src=0;src<n;src++) {     //  to handle disconnected components
+            if(!visited[src]) {
+                dfsHelper(src,visited);
+            }
+        }
+    }
+
+
     void print() {
         for(auto i : adjList) {
             cout<<i.first<<" : ";
@@ -56,6 +106,7 @@ class WGraph{                                 // weighted Graph
         }
     }
 
+
     void print() {
         for(auto i : adjList) {
             cout<<i.first<<" : ";
@@ -66,6 +117,7 @@ class WGraph{                                 // weighted Graph
             cout<<"}"<<endl;
         }
     }
+    
 };
 
 int main() {
@@ -96,6 +148,26 @@ int main() {
 
     wg.print();
     cout<<endl;
+
+
+    g.addEdge(0,1,1);
+    g.addEdge(0,2,1);
+    g.addEdge(1,3,1);
+    g.addEdge(2,8,1);
+    g.addEdge(8,4,1);
+    g.addEdge(4,5,1);
+    g.addEdge(4,7,1);
+    g.addEdge(5,6,1);
+    g.addEdge(7,6,1);
+    g.print();
+    cout<<endl;
+
+    cout<<"BFS : ";
+    g.bfsTraversal(0);
+    cout<<endl;
+
+    cout<<"DFS : ";
+    g.dfsTraversal(0,10);
 
     return 0;
 
