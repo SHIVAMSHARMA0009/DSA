@@ -36,7 +36,7 @@ int solveUsingMemoisation(vector<int>& stones,int i,int sum,vector<vector<int>> 
         return sum;
     }
 
-    if(dp[i][sum + totalsum] != -1) return dp[i][sum];
+    if(dp[i][sum + totalsum] != -1) return dp[i][sum + totalsum];
 
     // we will have two option either add the current or  subtract the current
 
@@ -71,7 +71,7 @@ int solveUsingTabulation(vector<int>& stones) {
             if(j + stones[i] <= totalsum)
                 pos = dp[i+1][totalsum + j + stones[i]];
 
-            if(j - stones[i] >= totalsum)
+            if(j - stones[i] >= -totalsum)
                 neg = dp[i+1][totalsum + j - stones[i]];
 
             dp[i][j + totalsum] =  min(pos,neg);
@@ -103,7 +103,7 @@ int solveUsingSO(vector<int>& stones) {
             if(j + stones[i] <= totalsum)
                 pos = next[totalsum + j + stones[i]];
 
-            if(j - stones[i] >= totalsum)
+            if(j - stones[i] >= -totalsum)
                 neg = next[totalsum + j - stones[i]];
 
             curr[j + totalsum] =  min(pos,neg);
@@ -115,28 +115,6 @@ int solveUsingSO(vector<int>& stones) {
 
 }
 
-
-
-// METHOD 2 : SUBSETTING  -> dividing array into two part and maintaining sum of both parts
-// sum will denoting summation of G1 stones
-
-int solveRE_M2(vector<int>&stones,int i,int sum ) {
-
-    int totalsum = accumulate(stones.begin(),stones.end(),0);
-
-    if(i == stones.size()) {
-        int g1Sum = sum;
-        int g2Sum = totalsum - g1Sum;
-
-        return abs(g1Sum - g2Sum);
-    }
-    
-    // 1 case -> lets put ith stone in G1 and excl.
-    int incl = solveRE_M2(stones,i+1,sum + stones[i]);
-    int excl = solveRE_M2(stones,i+1,sum);
-
-    return min(incl,excl);
-}
 
 
 int main() {
