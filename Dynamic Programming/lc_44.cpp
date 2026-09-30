@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool solveUsingRecursion(string s,int si,string p,int pi) {
+bool solveUsingRecursion(string& s,int si,string& p,int pi) {
 
     if(si == s.size() && pi == p.size()) return true;
 
@@ -32,7 +32,7 @@ bool solveUsingRecursion(string s,int si,string p,int pi) {
 
 
 
-bool solveUsingMemoisation(string s,int si,string p,int pi,vector<vector<int>>& dp) {
+bool solveUsingMemoisation(string& s,int si,string& p,int pi,vector<vector<int>>& dp) {
 
     if(si == s.size() && pi == p.size()) return true;
 
@@ -69,7 +69,7 @@ bool solveUsingMemoisation(string s,int si,string p,int pi,vector<vector<int>>& 
 
 
 
-bool solveUsingTabulation(string s,string p) {
+bool solveUsingTabulation(string& s,string& p) {
 
     vector<vector<bool>> dp(s.size()+1,vector<bool>(p.size()+1,false));
     dp[s.size()][p.size()] = true;
@@ -105,7 +105,7 @@ bool solveUsingTabulation(string s,string p) {
 }
 
 
-bool solveUsingSO(string s, string p) {
+bool solveUsingSO(string& s, string& p) {
 
     int n = s.size();
     int m = p.size();
