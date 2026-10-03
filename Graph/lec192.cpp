@@ -60,6 +60,54 @@ class Graph{
         return false;
     }
 
+
+
+
+    // BFS Approach (Topological Sorting Approach) (DIRECTED)
+
+    bool detectCycleBFS_D(int n) {
+
+        vector<int> ans;
+        vector<int> inDegree(n,0);
+        queue<int>q;
+
+        // calculate inDegree 
+        for(auto& u : adjList) {
+            for(auto v : u.second) {
+                inDegree[v]++;
+            }
+        }
+
+        // now  push all the nodes into queue with inDegree == 0
+        for(int i=0; i<n; i++) {
+            if(inDegree[i] == 0) {
+                q.push(i);
+            }
+        }
+
+        // main-logic
+        while(!q.empty()) {
+            int frontNode = q.front();
+            q.pop();
+
+            //include into ans
+            ans.push_back(frontNode);
+
+            //update the neighbours inDegree
+            for(auto nbr : adjList[frontNode]) {
+                inDegree[nbr]--;
+                if(inDegree[nbr] == 0) {
+                    q.push(nbr);
+                }
+            }
+        }
+
+        if(ans.size() != n) return true;
+
+        return false;
+
+    }
+
 };
 
 
@@ -89,6 +137,13 @@ int main() {
     }
     else{
         cout<<"No Cycle Found -> DFS"<<endl;
+    }
+
+    if(g.detectCycleBFS_D(V)) {
+        cout<<"Cycle Detected -> BFS!"<<endl;
+    }
+    else{
+        cout<<"No Cycle Found -> BFS"<<endl;
     }
 
     return 0;
