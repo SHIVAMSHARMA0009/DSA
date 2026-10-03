@@ -94,39 +94,6 @@ class Graph{
     }
 
 
-
-    // DFS Approach (DIRECTED)
-
-    bool  dfsCycle_D(int src,unordered_map<int,bool>&visited,unordered_map<int,bool>&dfsTracker) {
-        visited[src] = true;
-        dfsTracker[src] = true;
-
-        for(auto nbr : adjList[src]) {
-            if(dfsCycle_D(nbr,visited,dfsTracker)) {
-                return true;
-            }
-            else if(visited[nbr] == true && dfsTracker[nbr] == true) {
-                return true;
-            }
-        }
-
-        dfsTracker[src] = false;
-
-        return false;
-    }
-
-    bool detectCycleDFS_D(int n) {
-        unordered_map<int,bool> visited;
-        unordered_map<int,bool> dfsTracker;
-
-        for(int i=0;i<n;i++) {
-            if(!visited[i]) {
-                if(dfsCycle_D(i,visited,dfsTracker)) return true;
-            }
-        }
-        return false;
-    }
-
 };
 
 
@@ -150,27 +117,21 @@ int main() {
         g.addEdge(e.first,e.second,1);
     }
 
-    // if(g.detectCycleBFS_U(V)) {
-    //     cout<<"Cycle Detected -> BFS!"<<endl;
-    // }
-    // else{
-    //     cout<<"No Cycle Found -> BFS"<<endl;
-    // }
-
-
-    // if(g.detectCycleDFS_U(V)) {
-    //     cout<<"Cycle Detected -> DFS!"<<endl;
-    // }
-    // else{
-    //     cout<<"No Cycle Found -> DFS"<<endl;
-    // }
-
-    if(g.detectCycleDFS_D(V)) {
+    if(g.detectCycleBFS_U(V)) {
         cout<<"Cycle Detected -> BFS!"<<endl;
     }
     else{
         cout<<"No Cycle Found -> BFS"<<endl;
     }
+
+
+    if(g.detectCycleDFS_U(V)) {
+        cout<<"Cycle Detected -> DFS!"<<endl;
+    }
+    else{
+        cout<<"No Cycle Found -> DFS"<<endl;
+    }
+
 
     return 0;
 
