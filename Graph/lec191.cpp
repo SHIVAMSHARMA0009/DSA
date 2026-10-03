@@ -24,7 +24,8 @@ class Graph{
         }
     }
 
-    bool bfsCycle(int src, unordered_map<int,bool>& visited) {
+    // BFS Approach (UNDIRECTED)
+    bool bfsCycle_U(int src, unordered_map<int,bool>& visited) {
 
         queue<int>q;
         unordered_map<int,int>parent;
@@ -51,19 +52,81 @@ class Graph{
         return false;
     }
 
-    bool detectCycle(int n) {
+    bool detectCycleBFS_U(int n) {
         unordered_map<int,bool>visited;
 
         for(int i=0;i<n;i++) {              // graph may have multiple compenents
             if(!visited[i]) {
-                if(bfsCycle(i,visited)) {
+                if(bfsCycle_U(i,visited)) {
                     return true;
                 }
             }
         }
         return false;
     }
-    
+
+
+    // DFS Approach (UNDIRECTED)
+    bool dfsCycle_U(int src,int parent, unordered_map<int,bool>& visited) {
+        visited[src] = true;
+        for(auto nbr : adjList[src]) {
+            if(!visited[nbr]) {
+                if(dfsCycle_U(nbr,src,visited)) return true;
+            }
+            else if(visited[true] && nbr != parent) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool detectCycleDFS_U(int n) {
+        unordered_map<int,bool>visited;
+
+        for(int i=0;i<n;i++) {              // graph may have multiple compenents
+            if(!visited[i]) {
+                if(dfsCycle_U(i,-1,visited)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+    // DFS Approach (DIRECTED)
+
+    bool  dfsCycle_D(int src,unordered_map<int,bool>&visited,unordered_map<int,bool>&dfsTracker) {
+        visited[src] = true;
+        dfsTracker[src] = true;
+
+        for(auto nbr : adjList[src]) {
+            if(dfsCycle_D(nbr,visited,dfsTracker)) {
+                return true;
+            }
+            else if(visited[nbr] == true && dfsTracker[nbr] == true) {
+                return true;
+            }
+        }
+
+        dfsTracker[src] = false;
+
+        return false;
+    }
+
+    bool detectCycleDFS_D(int n) {
+        unordered_map<int,bool> visited;
+        unordered_map<int,bool> dfsTracker;
+
+        for(int i=0;i<n;i++) {
+            if(!visited[i]) {
+                if(dfsCycle_D(i,visited,dfsTracker)) return true;
+            }
+        }
+        return false;
+    }
+
 };
 
 
@@ -84,14 +147,29 @@ int main() {
 
     Graph g;
     for(auto e : edges) {
-        g.addEdge(e.first,e.second,0);
+        g.addEdge(e.first,e.second,1);
     }
 
-    if(g.detectCycle(V)) {
-        cout<<"Cycle Detected!"<<endl;
+    // if(g.detectCycleBFS_U(V)) {
+    //     cout<<"Cycle Detected -> BFS!"<<endl;
+    // }
+    // else{
+    //     cout<<"No Cycle Found -> BFS"<<endl;
+    // }
+
+
+    // if(g.detectCycleDFS_U(V)) {
+    //     cout<<"Cycle Detected -> DFS!"<<endl;
+    // }
+    // else{
+    //     cout<<"No Cycle Found -> DFS"<<endl;
+    // }
+
+    if(g.detectCycleDFS_D(V)) {
+        cout<<"Cycle Detected -> BFS!"<<endl;
     }
     else{
-        cout<<"No Cycle Found"<<endl;
+        cout<<"No Cycle Found -> BFS"<<endl;
     }
 
     return 0;
