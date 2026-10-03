@@ -13,7 +13,8 @@ class  Graph {
     }
 
 
-    void topoSort(int n, vector<int>& ans) {
+    // BFS
+    void topoSortBFS(int n, vector<int>& ans) {
 
         vector<int> inDegree(n,0);
         queue<int>q;
@@ -51,6 +52,28 @@ class  Graph {
 
     }
 
+    // DFS
+    void solveUsingDFS(int src,unordered_map<int,bool>&visited,vector<int>&ans) {
+        visited[src] = true;
+        for(auto nbr : adjList[src]) {
+            if(!visited[nbr]) {
+                solveUsingDFS(nbr,visited,ans);
+            }
+        }
+        ans.push_back(src);
+
+    }
+    vector<int> topoSortDFS(int V) {
+        vector<int>ans;
+        unordered_map<int,bool>visited;
+        for(int i=0;i<V;i++) {
+            if(!visited[i]) {
+                solveUsingDFS(i,visited,ans);
+            } 
+        }
+        return ans;
+    }
+
 };
 
 
@@ -75,10 +98,18 @@ int main() {
     }
 
     vector<int> order;
-    g.topoSort(V, order);
+    g.topoSortBFS(V, order);
 
-    cout<<"The Order : ";
+    cout<<"The Order (BFS) : ";
     for(auto ele : order) {
+        cout<<ele<<" ";
+    }
+    cout<<endl;
+
+    vector<int> order1;
+    g.topoSortBFS(V, order1);
+    cout<<"The Order (DFS) : ";
+    for(auto ele : order1) {
         cout<<ele<<" ";
     }
 
