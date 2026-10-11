@@ -30,6 +30,7 @@ int findCircleNUm(vector<vector<int>>& isConnected) {
             count++;
         } 
     }
+    return  count;
 }
 
 int main() {
@@ -45,5 +46,8 @@ int main() {
         }
     }
 
+    cout<<"The Provinces : "<<findCircleNUm(nums);
 
+    return 0;
+    
 }
