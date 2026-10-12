@@ -4,6 +4,7 @@
 using namespace std;
 
 class Graph{
+
     public:
     unordered_map<int,list<int>> adjList;
     void addEdges(int u,int v,bool direction) {
@@ -68,6 +69,7 @@ int main() {
     int n = 5;
     g.printAdjList(n);
 
+
     int timer = 0;
     int src = 0;
     int parent = -1;
@@ -77,4 +79,5 @@ int main() {
     g.countBridge(src,parent,tin,low,vis,timer);
     
     return 0;
+    
 }
