@@ -55,7 +55,7 @@ int main() {
     for(int i=0; i<n; i++) {
         int a, b;
         cin>>a>>b;
-        v.push_back({a,b});
+        v[i] = {a,b};
     }
 
     cout<<"The Maximum Panelty : "<<solve(row, col, v, n);
