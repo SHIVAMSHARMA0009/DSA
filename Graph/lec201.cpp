@@ -26,6 +26,7 @@ void unionSet(int u, int v, vector<int>&parent, vector<int>&rank) {
 }
 
 int MSTKruskals(int V,vector<vector<int>>& edges) {
+    
     vector<int>parent(V);    // stores last parent  e.g 2<-3<-1<-5   => parent of 5 is 1
     vector<int>rank(V,0);   // how many nodes indirectly or directly attched to any node
 
@@ -53,6 +54,7 @@ int MSTKruskals(int V,vector<vector<int>>& edges) {
 }
 
 int main() {
+
     int V,E;
     cout<<"Enter Number Of Nodes & Edges : ";
     cin>>V>>E;
