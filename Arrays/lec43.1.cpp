@@ -1,3 +1,5 @@
+// LINEAR SEARCH //
+
 /* we are given an array we have to search for element linearly */
 
 #include<bits/stdc++.h>
