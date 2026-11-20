@@ -1,3 +1,5 @@
+// UNIQUE ELEMENT //
+
 /* We are given an array we have to find the unique element from it */
 
 /* Approach 1 : running XOR operation through whole array [only works if remaining element are in pairs] */

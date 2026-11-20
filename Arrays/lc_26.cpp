@@ -1,5 +1,7 @@
+// REMOVE DUPLICATES //
+
 /* we are given an sorted array , we have to remove the duplicates from the array and array the no. of unique elements and unique must be starting of 
-   original array */
+   original array    e.g [0,0,1,1,2,2] => [0,1,2, , , ] */ 
 
 #include<bits/stdc++.h>
 using namespace std;

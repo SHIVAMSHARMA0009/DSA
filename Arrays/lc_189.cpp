@@ -1,3 +1,5 @@
+// LEFT ROTATE BY K //
+
 /* we are given an array and integer k , we have to left rotate an array about k */
 
 #include<bits/stdc++.h>

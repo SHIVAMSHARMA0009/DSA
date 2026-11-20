@@ -1,3 +1,5 @@
+// MOVE 0's TO END //
+
 /*we are given an array , we have to move all zeroes to the end */
 
 #include<bits/stdc++.h>

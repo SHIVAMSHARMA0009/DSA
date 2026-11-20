@@ -1,5 +1,6 @@
-// we are given with a sorted (1-indexed) array and a target //
+// TWO SUM //
 
+/* we are given with a sorted (1-indexed) array and a target */
 /* we have to return index of two numbers which makes upto the target */
 
 #include<bits/stdc++.h>
