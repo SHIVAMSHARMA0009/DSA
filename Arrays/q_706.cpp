@@ -74,7 +74,7 @@ class solution {
     }
 
 
-    // 
+    // T.C : O(m+n)   ||  S.C : O(1)
     vector<int> optimal(vector<int>& nums1, vector<int>& nums2) {
         int n = nums1.size();
         int m = nums2.size();
